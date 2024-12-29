@@ -1350,6 +1350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6487221184334587648}
+  - component: {fileID: 5932409581874797674}
   m_Layer: 0
   m_Name: Leg Z-
   m_TagString: Untagged
@@ -1373,6 +1374,20 @@ Transform:
   - {fileID: 5162058815907373111}
   m_Father: {fileID: 6880427450866127123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5932409581874797674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671070376383692113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: 0, y: 0, z: -115}
 --- !u!1 &1866629377007668266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,6 +2175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8526703070777765315}
+  - component: {fileID: 2091463929115109179}
   m_Layer: 0
   m_Name: Leg Z+
   m_TagString: Untagged
@@ -2183,6 +2199,20 @@ Transform:
   - {fileID: 207833504829748242}
   m_Father: {fileID: 6880427450866127123}
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+--- !u!114 &2091463929115109179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898508327084227699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: 0, y: 0, z: -115}
 --- !u!1 &2946221858562321464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,6 +2503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657738833053575120}
+  - component: {fileID: 8753370007179970969}
   m_Layer: 0
   m_Name: GridfinFold
   m_TagString: Untagged
@@ -2499,6 +2530,20 @@ Transform:
   - {fileID: 1605350092229774255}
   m_Father: {fileID: 1898322916849492240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8753370007179970969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207615532886158353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: -90, y: 0, z: 0}
 --- !u!1 &3304494674720869227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,6 +4202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 955365463146432833}
+  - component: {fileID: 7314268480616724788}
   m_Layer: 0
   m_Name: Leg X-
   m_TagString: Untagged
@@ -4180,6 +4226,20 @@ Transform:
   - {fileID: 8497784288010101044}
   m_Father: {fileID: 6880427450866127123}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &7314268480616724788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300836594340046532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: 0, y: 0, z: -115}
 --- !u!1 &5436825997161608418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4653,6 +4713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4904920163253387101}
+  - component: {fileID: 6923925909588676550}
   m_Layer: 0
   m_Name: GridfinFold
   m_TagString: Untagged
@@ -4679,6 +4740,20 @@ Transform:
   - {fileID: 2358666798585150397}
   m_Father: {fileID: 6174447952656046375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6923925909588676550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974121573450873785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: -90, y: 0, z: 0}
 --- !u!1 &5994888974178884221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,6 +4885,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 609387202516422130}
+  - component: {fileID: 3424530959053191556}
   m_Layer: 0
   m_Name: GridfinFold
   m_TagString: Untagged
@@ -4836,6 +4912,20 @@ Transform:
   - {fileID: 8010383746711827523}
   m_Father: {fileID: 5378943780992906077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3424530959053191556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202084664259518050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: -90, y: 0, z: 0}
 --- !u!1 &6482069049305484641
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,6 +5131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7197354880339045554}
+  - component: {fileID: 230448606167160608}
   m_Layer: 0
   m_Name: Leg X+
   m_TagString: Untagged
@@ -5064,6 +5155,20 @@ Transform:
   - {fileID: 2455399212256903583}
   m_Father: {fileID: 6880427450866127123}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &230448606167160608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6723753741950045222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: 0, y: 0, z: -115}
 --- !u!1 &6753008307974651767
 GameObject:
   m_ObjectHideFlags: 0
@@ -6955,6 +7060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3839256609761587046}
+  - component: {fileID: 4878637809211477907}
   m_Layer: 0
   m_Name: GridfinFold
   m_TagString: Untagged
@@ -6981,6 +7087,20 @@ Transform:
   - {fileID: 8695340781673146321}
   m_Father: {fileID: 132285299066512597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4878637809211477907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440535593618565110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5532bcf5ec016624ca015eb68bcb7962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  deployVector: {x: -90, y: 0, z: 0}
 --- !u!1 &8511258919985844758
 GameObject:
   m_ObjectHideFlags: 0
@@ -7164,6 +7284,7 @@ GameObject:
   - component: {fileID: 1069968387235024512}
   - component: {fileID: 5476680689971131927}
   - component: {fileID: 7327661532044720622}
+  - component: {fileID: 7604166192050265555}
   m_Layer: 0
   m_Name: Falcon 9 - Stage 1
   m_TagString: Untagged
@@ -7242,6 +7363,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7604166192050265555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773001410065149818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ac7800669d58148994f466ec2da725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instabreakObjects:
+  - {fileID: 6482069049305484641}
+  - {fileID: 27937040407134598}
+  - {fileID: 7972762002303143231}
+  - {fileID: 2967279088126176088}
+  tolerantObjects:
+  - {fileID: 5954450039607506048}
+  - {fileID: 5632469034414755231}
+  - {fileID: 4968902910103691674}
+  - {fileID: 9081617532073204612}
+  NormalVelocityTolerance: 12
+  AngleTolerance: 15
 --- !u!1 &8773380165955977972
 GameObject:
   m_ObjectHideFlags: 0
