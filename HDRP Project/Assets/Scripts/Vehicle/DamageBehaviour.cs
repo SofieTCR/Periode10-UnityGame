@@ -12,6 +12,8 @@ public class DamageBahaviour : MonoBehaviour
     public float AngleTolerance = 15f;
     private List<GameObject> looseParts = new List<GameObject>();
     private Rigidbody parentRB;
+    private bool isDestroyed = false;
+    private bool explode = false;
 
     private void Start()
     {
@@ -19,23 +21,38 @@ public class DamageBahaviour : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        if (isDestroyed) return;
         var velocity = collision.relativeVelocity.magnitude;
         var upVector = transform.up;
         foreach(var contact in collision.contacts)
         {
             var tmpObj = contact.thisCollider.gameObject;
-            if (tmpObj == gameObject
+            if ((tmpObj == gameObject && contact.otherCollider.tag != "RocketPart")
             || instabreakObjects.Contains(tmpObj) 
             || (tolerantObjects.Contains(tmpObj) 
             && (velocity > NormalVelocityTolerance 
             || Vector3.Angle(upVector, contact.normal) > AngleTolerance)))
             {
-                HandleSnap(tmpObj);
+                HandleSnap(tmpObj, contact.point);
+                if (isDestroyed) return;
             }
         }
     }
 
-    void HandleSnap(GameObject obj, Vector3 impactPos = new Vector3())
+    private void FixedUpdate()
+    {
+        if (explode)
+        {
+            explode = false;
+            foreach (var part in looseParts)
+            {
+                var rb = part.GetComponent<Rigidbody>();
+                rb.AddExplosionForce(8e2f, transform.position, 100f, 10f, ForceMode.Acceleration);
+            }
+        }
+    }
+
+    void HandleSnap(GameObject obj, Vector3 impactPos)
     {
         switch (obj.name)
         {
@@ -44,10 +61,11 @@ public class DamageBahaviour : MonoBehaviour
                 DestroyLeg(obj);
                 break;
             case "grid fin outer rim":
-                Debug.Log($"[{obj.transform.parent.parent.parent.gameObject.name}] would've snapped");
+                if (obj.transform.parent.parent.parent == null) break;
+                DestroyGridfin(obj);
                 break;
             default:
-                Debug.Log("Full Explosion!!");
+                DestroyVehicle(impactPos);
                 break;
         }
     }
@@ -77,13 +95,14 @@ public class DamageBahaviour : MonoBehaviour
             RB_Strut.angularDamping = parentRB.angularDamping;
             RB_Strut.linearDamping = parentRB.linearDamping;
             RB_Strut.mass = 100;
+            parentRB.mass -= RB_Strut.mass;
             RB_Strut.constraints = RigidbodyConstraints.FreezeRotationY;
             var collider = strut.AddComponent<CapsuleCollider>();
             collider.radius = 0.001f;
             collider.height = length;
             collider.center = new Vector3(0, length / 2, 0);
         }
-        looseParts.Add(obj);
+        looseParts.Add(obj.transform.parent.gameObject);
         obj.transform.parent.SetParent(null);
         var RB = obj.transform.parent.gameObject.AddComponent<Rigidbody>();
         RB.linearVelocity = parentRB.GetPointVelocity(obj.transform.parent.position);
@@ -91,6 +110,34 @@ public class DamageBahaviour : MonoBehaviour
         RB.angularDamping = parentRB.angularDamping;
         RB.linearDamping = parentRB.linearDamping;
         RB.mass = 1000;
+        parentRB.mass -= RB.mass;
+    }
+
+    void DestroyGridfin(GameObject obj)
+    {
+        string objParentName = obj.transform.parent.parent.parent.gameObject.name;
+        var parent = obj.transform.parent.parent;
+        parent.SetParent(null);
+        looseParts.Add(parent.gameObject);
+        var RB = parent.gameObject.AddComponent<Rigidbody>();
+        RB.linearVelocity = parentRB.GetPointVelocity(obj.transform.parent.position);
+        RB.angularVelocity = parentRB.angularVelocity;
+        RB.angularDamping = parentRB.angularDamping;
+        RB.linearDamping = parentRB.linearDamping;
+        RB.mass = 400;
+        parentRB.mass -= RB.mass;
+        parent.gameObject.AddComponent<MeshCollider>().convex = true;
+    }
+
+    void DestroyVehicle(Vector3 impactPos)
+    {
+        foreach (var tmpObj in instabreakObjects.Concat(tolerantObjects))
+        {
+            HandleSnap(tmpObj, new Vector3());
+        }
+        explode = true;
+        Debug.Log("Full Explosion!!");
+        isDestroyed = true;
     }
 
     private void OnDestroy()

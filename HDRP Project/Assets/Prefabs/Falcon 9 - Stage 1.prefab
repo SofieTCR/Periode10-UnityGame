@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2961321756218013260}
   m_Layer: 0
   m_Name: grid fin outer rim
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1213,7 +1213,7 @@ GameObject:
   - component: {fileID: 5941455624289277104}
   m_Layer: 0
   m_Name: Attachment Z-
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1747,7 +1747,7 @@ GameObject:
   - component: {fileID: 3346760545926117099}
   m_Layer: 0
   m_Name: GridFinPivot
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2313,7 +2313,7 @@ GameObject:
   - component: {fileID: 5931102370292618557}
   m_Layer: 0
   m_Name: grid fin outer rim
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2557,7 +2557,7 @@ GameObject:
   - component: {fileID: 8295676003380915389}
   m_Layer: 0
   m_Name: GridFinPivot
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2997,7 +2997,7 @@ GameObject:
   - component: {fileID: 7624336860970438568}
   m_Layer: 0
   m_Name: Attachment Z+
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3137,7 +3137,7 @@ GameObject:
   - component: {fileID: 5838413163434329057}
   m_Layer: 0
   m_Name: Attachment X+
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3277,7 +3277,7 @@ GameObject:
   - component: {fileID: 296537101536916265}
   m_Layer: 0
   m_Name: GridFinPivot
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3891,7 +3891,7 @@ GameObject:
   - component: {fileID: 288511824434182990}
   m_Layer: 0
   m_Name: LegMesh
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4408,7 +4408,7 @@ GameObject:
   - component: {fileID: 1273307810953746265}
   m_Layer: 0
   m_Name: LegMesh
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4606,7 +4606,7 @@ GameObject:
   - component: {fileID: 3918044305510315442}
   m_Layer: 0
   m_Name: LegMesh
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4940,7 +4940,7 @@ GameObject:
   - component: {fileID: 8520783070487332395}
   m_Layer: 0
   m_Name: grid fin outer rim
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6400,7 +6400,7 @@ GameObject:
   - component: {fileID: 9044382352334549973}
   m_Layer: 0
   m_Name: GridFinPivot
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6520,7 +6520,7 @@ GameObject:
   - component: {fileID: 2813485848526912461}
   m_Layer: 0
   m_Name: grid fin outer rim
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7658,7 +7658,7 @@ GameObject:
   - component: {fileID: 3778109341453447834}
   m_Layer: 0
   m_Name: Attachment X-
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7713,7 +7713,7 @@ GameObject:
   - component: {fileID: 1860168062136146499}
   m_Layer: 0
   m_Name: LegMesh
-  m_TagString: Untagged
+  m_TagString: RocketPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
