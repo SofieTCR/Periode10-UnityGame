@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108620741}
   m_Layer: 0
-  m_Name: LegLookatContraint
+  m_Name: LegLookatContraint Z-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,11 +237,11 @@ Transform:
   m_GameObject: {fileID: 108620740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.005861065, z: 0.08499769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3001269387991092558}
+  m_Father: {fileID: 8085531797302800114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125992088
 GameObject:
@@ -1037,6 +1037,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &516343646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516343647}
+  m_Layer: 0
+  m_Name: StrutSec5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516343647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516343646}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000029802035, y: -0.0000000720016, z: -7.672862e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.029679963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3001269387991092558}
+  m_Father: {fileID: 1060217329281046085}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &522036689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 522036690}
+  - component: {fileID: 522036691}
   m_Layer: 0
   m_Name: Attachment Z-
   m_TagString: Untagged
@@ -1061,7 +1094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522036689}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000023737756, y: -0.9052796, z: 0.42481634, w: -0.00000005960465}
+  m_LocalRotation: {x: -0.0000001297383, y: 0.90526843, z: -0.42484003, w: 0.000000005204562}
   m_LocalPosition: {x: 0, y: 0.020414662, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1069,6 +1102,26 @@ Transform:
   - {fileID: 6764850135470458226}
   m_Father: {fileID: 5796761325659853906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1183024399 &522036691
+LookAtConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522036689}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 90, y: 0, z: 0}
+  m_Roll: 0
+  m_WorldUpObject: {fileID: 0}
+  m_UseUpObject: 0
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 108620741}
+    weight: 1
 --- !u!1 &531346244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,7 +3937,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7289681032735437476}
+  - {fileID: 516343647}
   m_Father: {fileID: 7232406395092183906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1060559519827079481
@@ -4578,22 +4631,6 @@ Transform:
   - {fileID: 8120692421902467788}
   m_Father: {fileID: 7199456068151651993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2619500256065116176
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7274851627981472031}
-  m_Layer: 0
-  m_Name: leg piston tip.002_end
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!33 &2629175534621519388
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4819,13 +4856,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9083283281474551226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000016055793, y: 0.7071069, z: -0.70710665, w: 0.00000011479962}
-  m_LocalPosition: {x: -0.000005535183, y: -0.0000000047683715, z: -0.0000055360792}
-  m_LocalScale: {x: 1.0000004, y: 0.99999934, z: 1.0000001}
+  m_LocalRotation: {x: -0, y: -0, z: -1.9141256e-17, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.009320026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 108620741}
-  m_Father: {fileID: 7289681032735437476}
+  m_Children: []
+  m_Father: {fileID: 516343647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3003527903470567034
 GameObject:
@@ -4949,22 +4985,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3323755698325935520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7289681032735437476}
-  m_Layer: 0
-  m_Name: StrutSec5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &3349609825311203489
 Transform:
   m_ObjectHideFlags: 0
@@ -6312,38 +6332,6 @@ Transform:
   - {fileID: 1060217329281046085}
   m_Father: {fileID: 1060559519827079481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &7274851627981472031
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2619500256065116176}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.010000009, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7289681032735437476}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &7289681032735437476
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3323755698325935520}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.00000017142706, y: -0.70710707, z: 0.70710665, w: 0.00000008330812}
-  m_LocalPosition: {x: 0, y: 0, z: 0.038999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3001269387991092558}
-  - {fileID: 7274851627981472031}
-  m_Father: {fileID: 1060217329281046085}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &7688301425490148351
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6627,6 +6615,7 @@ Transform:
   m_Children:
   - {fileID: 1690742640617348824}
   - {fileID: 4807877988819431199}
+  - {fileID: 108620741}
   m_Father: {fileID: 1115305618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8092417727898116454
@@ -7060,7 +7049,7 @@ GameObject:
   - component: {fileID: 8133143264533906086}
   - component: {fileID: 2157690765244700510}
   m_Layer: 0
-  m_Name: leg piston tip.002
+  m_Name: StrutSec5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
