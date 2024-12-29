@@ -257,11 +257,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0}
   bottomAltitude:
-    m_OverrideState: 0
-    m_Value: 1200
+    m_OverrideState: 1
+    m_Value: 800
   altitudeRange:
-    m_OverrideState: 0
-    m_Value: 2000
+    m_OverrideState: 1
+    m_Value: 1800
   fadeInMode:
     m_OverrideState: 0
     m_Value: 0
@@ -292,8 +292,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   m_CloudPreset:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 4
   cumulusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -455,16 +455,16 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 107
   erosionNoiseType:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   microErosion:
     m_OverrideState: 0
     m_Value: 0
   microErosionFactor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.5
   microErosionScale:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 200
   ambientLightProbeDimmer:
     m_OverrideState: 0
@@ -476,17 +476,17 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.1
   globalWindSpeed:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
-      mode: 1
-      customValue: 100
+      mode: 0
+      customValue: 120
       additiveValue: 0
       multiplyValue: 1
   orientation:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
-      mode: 1
-      customValue: 0
+      mode: 0
+      customValue: 360
       additiveValue: 0
       multiplyValue: 1
   altitudeDistortion:
