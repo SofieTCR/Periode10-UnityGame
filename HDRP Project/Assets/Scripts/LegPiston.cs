@@ -1,18 +1,19 @@
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class LegPiston : MonoBehaviour
 {
     public Transform target;
     public Transform[] pistonSegments;
     private float totalLength;
-    private float[] segmentLengths;
+    public float[] segmentLengths = new float[5] { 3.3021853585f, 3.3021853585f, 3.3021853585f, 3.297066f, 2.3650634f};
+    public float scale = 100;
 
     private void Start()
     {
         if (target == null) { DisableModule(pMessage: $"{nameof(target)} is required"); return; }
         if (pistonSegments == null || pistonSegments.Length == 0) { DisableModule(pMessage: $"{nameof(pistonSegments)} is required"); return; }
+        totalLength = segmentLengths.Sum();
     }
 
     private void DisableModule(string pMessage = null)
@@ -23,41 +24,14 @@ public class LegPiston : MonoBehaviour
     }
     void Update()
     {
-        float distance = Vector3.Distance(pistonSegments[0].position, target.position);
+        float distance = Vector3.Distance(pistonSegments[0].position, target.position) - segmentLengths[0];
 
-        if (totalLength == 0)
+        float proportion = (distance - totalLength) / totalLength;
+        for (int i = 1; i < pistonSegments.Length; i++)
         {
-            segmentLengths = new float[pistonSegments.Length];
-            for (int i = 0; i < pistonSegments.Length; i++)
-            {
-                MeshRenderer meshRenderer = null;
-                if (pistonSegments[i].GetChild(0) == null)
-                {
-                    meshRenderer = pistonSegments[i].GetComponent<MeshRenderer>();
-                }
-                else
-                {
-                    meshRenderer = pistonSegments[i].GetComponentInChildren<MeshRenderer>();
-                }
-                if (meshRenderer != null)
-                {
-                    float segmentLength = meshRenderer.bounds.size.z;
-                    segmentLengths[i] = segmentLength;
-                    totalLength += segmentLength;
-                }
-                else
-                {
-                    DisableModule($"Segment {pistonSegments[i].name} does not have a MeshRenderer.");
-                    return;
-                }
-            }
-        }
-
-        float proportion = distance / totalLength;
-        for (int i = 0; i < pistonSegments.Length; i++)
-        {
-            float segmentExtension = segmentLengths[i] * proportion;
-            pistonSegments[i].localPosition = new Vector3(0, 0, segmentExtension);
+            float segmentExtension = segmentLengths[i-1] + segmentLengths[i] * proportion;
+            pistonSegments[i].localPosition = new Vector3(0, 0, segmentExtension/scale);
+            // -115 angle
         }
     }
 }
