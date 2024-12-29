@@ -4421,6 +4421,7 @@ GameObject:
   - component: {fileID: 6764850135470458226}
   - component: {fileID: 5090980716673272221}
   - component: {fileID: 977358650048986932}
+  - component: {fileID: 6764850135470458227}
   m_Layer: 0
   m_Name: StrutSec1
   m_TagString: Untagged
@@ -6150,6 +6151,25 @@ Transform:
   - {fileID: 1060559519827079481}
   m_Father: {fileID: 522036690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6764850135470458227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085354638734744282}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8cc54ee34a2aa4b9137e1f8551fa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 108620741}
+  pistonSegments:
+  - {fileID: 6764850135470458226}
+  - {fileID: 1060559519827079481}
+  - {fileID: 7232406395092183906}
+  - {fileID: 1060217329281046085}
+  - {fileID: 516343647}
 --- !u!4 &6829900072355558538
 Transform:
   m_ObjectHideFlags: 0
