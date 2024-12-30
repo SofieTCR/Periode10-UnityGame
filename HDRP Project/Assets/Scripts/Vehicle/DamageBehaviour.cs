@@ -10,10 +10,10 @@ public class DamageBahaviour : MonoBehaviour
     public GameObject[] tolerantObjects = new GameObject[0];
     public float NormalVelocityTolerance = 12f;
     public float AngleTolerance = 15f;
+    public GameObject destroyedPrefab;
     private List<GameObject> looseParts = new List<GameObject>();
     private Rigidbody parentRB;
     private bool isDestroyed = false;
-    private bool explode = false;
 
     private void Start()
     {
@@ -39,19 +39,6 @@ public class DamageBahaviour : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (explode)
-        {
-            explode = false;
-            foreach (var part in looseParts)
-            {
-                var rb = part.GetComponent<Rigidbody>();
-                rb.AddExplosionForce(8e2f, transform.position, 100f, 10f, ForceMode.Acceleration);
-            }
-        }
-    }
-
     void HandleSnap(GameObject obj, Vector3 impactPos)
     {
         switch (obj.name)
@@ -73,7 +60,6 @@ public class DamageBahaviour : MonoBehaviour
     void DestroyLeg(GameObject obj)
     {
         string objParentName = obj.transform.parent.gameObject.name;
-        Debug.Log($"[{objParentName}] snapped");
         var dir = objParentName.Split(' ').Last();
         var strutParent = obj.transform.parent.parent.GetChild(0);
         GameObject strut = strutParent.Cast<Transform>()
@@ -135,9 +121,18 @@ public class DamageBahaviour : MonoBehaviour
         {
             HandleSnap(tmpObj, new Vector3());
         }
-        explode = true;
-        Debug.Log("Full Explosion!!");
+        gameObject.SetActive(false);
+        var destroyedBits = Instantiate(destroyedPrefab, transform.position, transform.rotation);
+        foreach (var rb in destroyedBits.GetComponentsInChildren<Rigidbody>()) looseParts.Add(rb.gameObject);
+        Destroy(gameObject, 15);
+        Destroy(destroyedBits, 15);
         isDestroyed = true;
+        var explosionOrigin = transform.TransformPoint(transform.GetChild(1).GetComponent<MeshFilter>().mesh.bounds.center);
+        foreach (var part in looseParts)
+        {
+            var rb = part.GetComponent<Rigidbody>();
+            rb.AddExplosionForce(8e2f, explosionOrigin, 100f, 0, ForceMode.Acceleration);
+        }
     }
 
     private void OnDestroy()

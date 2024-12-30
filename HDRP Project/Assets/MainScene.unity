@@ -517,6 +517,14 @@ PrefabInstance:
       propertyPath: isDeployed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4554479538106421821, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892023528985352804, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5355289593105617656, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.12684001
