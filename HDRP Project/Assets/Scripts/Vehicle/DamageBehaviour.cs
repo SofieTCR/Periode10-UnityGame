@@ -126,8 +126,8 @@ public class DamageBahaviour : MonoBehaviour
         var destroyedBits = Instantiate(destroyedPrefab, transform.position, transform.rotation);
         Instantiate(firePrefab, impactPos, Quaternion.identity);
         foreach (var rb in destroyedBits.GetComponentsInChildren<Rigidbody>()) looseParts.Add(rb.gameObject);
-        Destroy(gameObject, 15);
-        Destroy(destroyedBits, 15);
+        Destroy(gameObject, 20);
+        Destroy(destroyedBits, 20);
         isDestroyed = true;
         var explosionOrigin = transform.TransformPoint(transform.GetChild(1).GetComponent<MeshFilter>().mesh.bounds.center);
         foreach (var part in looseParts)

@@ -8666,7 +8666,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!114 &7604166192050265555
 MonoBehaviour:
@@ -8691,7 +8691,7 @@ MonoBehaviour:
   - {fileID: 4968902910103691674}
   - {fileID: 9081617532073204612}
   NormalVelocityTolerance: 12
-  AngleTolerance: 15
+  AngleTolerance: 6
   destroyedPrefab: {fileID: 4668067473210732976, guid: d0d6b60fce81196409fbe5aa630a945e, type: 3}
   firePrefab: {fileID: 6446287320533857105, guid: 9655885f03482e74eb89a48f8188b47e, type: 3}
 --- !u!1 &8773380165955977972

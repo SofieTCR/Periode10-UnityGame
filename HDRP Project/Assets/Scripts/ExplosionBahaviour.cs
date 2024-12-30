@@ -14,7 +14,7 @@ public class ExplosionBahaviour : MonoBehaviour
     public Dictionary<float, float> fireScale = new Dictionary<float, float>
     {
         { 0, .0f },
-        { 3, 20f },
+        { 2, 30f },
         { 8, 12.5f },
         { 12, 7f },
         { 15, 0 },
