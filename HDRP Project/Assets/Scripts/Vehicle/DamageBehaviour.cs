@@ -11,6 +11,7 @@ public class DamageBahaviour : MonoBehaviour
     public float NormalVelocityTolerance = 12f;
     public float AngleTolerance = 15f;
     public GameObject destroyedPrefab;
+    public GameObject firePrefab;
     private List<GameObject> looseParts = new List<GameObject>();
     private Rigidbody parentRB;
     private bool isDestroyed = false;
@@ -123,6 +124,7 @@ public class DamageBahaviour : MonoBehaviour
         }
         gameObject.SetActive(false);
         var destroyedBits = Instantiate(destroyedPrefab, transform.position, transform.rotation);
+        Instantiate(firePrefab, impactPos, Quaternion.identity);
         foreach (var rb in destroyedBits.GetComponentsInChildren<Rigidbody>()) looseParts.Add(rb.gameObject);
         Destroy(gameObject, 15);
         Destroy(destroyedBits, 15);

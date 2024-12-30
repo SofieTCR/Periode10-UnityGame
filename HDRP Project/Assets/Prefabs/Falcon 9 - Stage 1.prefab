@@ -8693,6 +8693,7 @@ MonoBehaviour:
   NormalVelocityTolerance: 12
   AngleTolerance: 15
   destroyedPrefab: {fileID: 4668067473210732976, guid: d0d6b60fce81196409fbe5aa630a945e, type: 3}
+  firePrefab: {fileID: 6446287320533857105, guid: 9655885f03482e74eb89a48f8188b47e, type: 3}
 --- !u!1 &8773380165955977972
 GameObject:
   m_ObjectHideFlags: 0
