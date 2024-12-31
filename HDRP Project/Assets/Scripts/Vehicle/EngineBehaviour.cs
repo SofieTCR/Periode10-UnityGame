@@ -6,11 +6,11 @@ public class EngineBehaviour : MonoBehaviour
     public GameObject Stage;
     public GameObject FireVFX;
     public AudioSource FireSFX;
-    public Vector3 GimbalAxis = new Vector3(0, 0, 1);
+    public Vector3 GimbalAxis = new Vector3(0, 0, -1);
     public float GimbalRange = 12f;
     public float GimbalSpeed = 120f;
     public float GimbalAcceleration = 180f;
-    public float Thrust = 650e3f;
+    public float Thrust = 450e3f;
     public Dictionary<float, float> FirePosition = new Dictionary<float, float>
     {
         { 0, -.01f },
@@ -41,7 +41,7 @@ public class EngineBehaviour : MonoBehaviour
         if (rotationController.acceleration != GimbalAcceleration) rotationController.acceleration = GimbalAcceleration;
 
         Quaternion targetRotation = defaultRotation;
-        if (state.Throttle != 0f && Stage.gameObject.activeSelf)
+        if (state.Throttle >= 0f && Stage.gameObject.activeSelf)
         {
             targetRotation *= Quaternion.Euler(GimbalAxis * GimbalRange * state.Steer);
             var firePos = FireVFX.transform.localPosition;
@@ -63,6 +63,10 @@ public class EngineBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        if (!Stage.gameObject.activeSelf || state.Throttle <= 0f) return;
+        var thrustVec = transform.up.normalized * Thrust * state.Throttle;
+        RB.AddForceAtPosition(thrustVec, transform.position);
+        var drawPoint = transform.TransformPoint(new Vector3(0, 0f, 0.1f));
+        Debug.DrawLine(drawPoint, drawPoint + thrustVec.normalized, Color.green, Time.fixedDeltaTime);
     }
 }

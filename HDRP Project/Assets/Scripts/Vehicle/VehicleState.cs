@@ -10,7 +10,7 @@ public class VehicleState : MonoBehaviour
     public bool LegsDeployed;
     public bool FinsDeployed;
 
-    private float ThrottleResponseSpeed = 0.2f;
+    private float ThrottleResponseSpeed = 0.5f;
     private List<DeployBehaviour> LandingLegs;
     private List<DeployBehaviour> Gridfins;
     private bool _legsDeployed;

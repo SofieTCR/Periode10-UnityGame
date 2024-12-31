@@ -4229,11 +4229,11 @@ MonoBehaviour:
   Stage: {fileID: 8773001410065149818}
   FireVFX: {fileID: 2853992293064390419}
   FireSFX: {fileID: 2457271232842086287}
-  GimbalAxis: {x: 0, y: 0, z: 1}
+  GimbalAxis: {x: 0, y: 0, z: -1}
   GimbalRange: 12
   GimbalSpeed: 120
   GimbalAcceleration: 180
-  Thrust: 650000
+  Thrust: 450000
 --- !u!1 &4292728695725427561
 GameObject:
   m_ObjectHideFlags: 0
@@ -9627,6 +9627,62 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6209908576003867152}
     m_Modifications:
+    - target: {fileID: 1554108587470130511, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053583067306098826, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104151986909611599, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359408214380708955, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375201039106683625, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942359538023881217, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415927245348612235, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765668986698542331, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002624857657970101, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100407400656749137, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234895248809126098, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326915200721114938, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362873326358193859, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274860978047510816, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.005
@@ -9686,6 +9742,14 @@ PrefabInstance:
     - target: {fileID: 8829451551789304542, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829451551789304543, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829451551789304543, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
+      propertyPath: m_RendererPriority
+      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
