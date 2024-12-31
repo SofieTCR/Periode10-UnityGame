@@ -7,7 +7,7 @@ public class LerpedRotation
     public float acceleration;
     public float maxRotationSpeed;
 
-    private float rotationProgress;
+    private Quaternion currentRotation;
     private Transform rotationTransform;
 
     public LerpedRotation(Transform pRotationTransform, float pAcceleration, float pMaxRotationSpeed)
@@ -15,23 +15,24 @@ public class LerpedRotation
         rotationTransform = pRotationTransform;
         acceleration = pAcceleration;
         maxRotationSpeed = pMaxRotationSpeed;
+        currentRotation = pRotationTransform.localRotation;
     }
-    public bool RotateWithAcceleration(Quaternion startRotation, Quaternion targetRotation)
+
+    public bool RotateWithAcceleration(Quaternion targetRotation)
     {
-        if (rotationProgress >= 1f)
+        float totalRotationAngle = Quaternion.Angle(currentRotation, targetRotation);
+
+        if (totalRotationAngle < 0.01f)
         {
             isRotating = false;
             currentSpeed = 0f;
             rotationTransform.localRotation = targetRotation;
-            rotationProgress = 0f;
+            currentRotation = targetRotation;
             return false;
         }
 
-        float totalRotationAngle = Quaternion.Angle(startRotation, targetRotation);
-        float distanceCovered = totalRotationAngle * rotationProgress;
-        float distanceLeft = totalRotationAngle - distanceCovered;
         float stopDist = Mathf.Pow(currentSpeed, 2) / (2 * acceleration);
-        if (distanceLeft > stopDist)
+        if (totalRotationAngle > stopDist)
         {
             currentSpeed += acceleration * Time.deltaTime;
             currentSpeed = Mathf.Min(currentSpeed, maxRotationSpeed);
@@ -43,9 +44,10 @@ public class LerpedRotation
         }
 
         float deltaRotation = currentSpeed * Time.deltaTime;
-        rotationProgress += deltaRotation / totalRotationAngle;
+        float rotationFraction = deltaRotation / totalRotationAngle;
 
-        rotationTransform.localRotation = Quaternion.Slerp(startRotation, targetRotation, rotationProgress);
+        currentRotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFraction);
+        rotationTransform.localRotation = currentRotation;
 
         return true;
     }
