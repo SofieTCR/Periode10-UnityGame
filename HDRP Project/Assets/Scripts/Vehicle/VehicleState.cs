@@ -33,8 +33,8 @@ public class VehicleState : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z)) Throttle = 1f;
             if (Input.GetKeyDown(KeyCode.X)) Throttle = 0f;
 
-            if (Input.GetKey(KeyCode.A)) Steer = 1f;
-            else if (Input.GetKey(KeyCode.D)) Steer = -1f;
+            if (Input.GetKey(KeyCode.A)) Steer = -1f;
+            else if (Input.GetKey(KeyCode.D)) Steer = 1f;
             else Steer = 0f;
 
             if (!LegsDeployed && Input.GetKeyDown(KeyCode.G)) // Player can't retract legs.

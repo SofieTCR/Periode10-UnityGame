@@ -2269,9 +2269,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stage: {fileID: 8773001410065149818}
-  RotationAxis: {x: 0, y: 1, z: 0}
+  RotationAxis: {x: 0, y: -1, z: 0}
   SurfaceArea: 1.5
   ActuationRange: 35
+  ActuationSpeed: 160
+  ActuationAcceleration: 90
+  ControlAuthority: 2
+  AirDensity: 1.225
 --- !u!1 &2450706395502059575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,6 +3195,10 @@ MonoBehaviour:
   RotationAxis: {x: 0, y: 1, z: 0}
   SurfaceArea: 1.5
   ActuationRange: 35
+  ActuationSpeed: 160
+  ActuationAcceleration: 90
+  ControlAuthority: 2
+  AirDensity: 1.225
 --- !u!1 &3401325104579652227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,6 +4283,10 @@ MonoBehaviour:
   RotationAxis: {x: 0, y: 1, z: 0}
   SurfaceArea: 1.5
   ActuationRange: 35
+  ActuationSpeed: 160
+  ActuationAcceleration: 90
+  ControlAuthority: 2
+  AirDensity: 1.225
 --- !u!1 &4402051028789842270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7605,9 +7617,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stage: {fileID: 8773001410065149818}
-  RotationAxis: {x: 0, y: 1, z: 0}
+  RotationAxis: {x: 0, y: -1, z: 0}
   SurfaceArea: 1.5
   ActuationRange: 35
+  ActuationSpeed: 160
+  ActuationAcceleration: 90
+  ControlAuthority: 2
+  AirDensity: 1.225
 --- !u!1 &7771550088628915459
 GameObject:
   m_ObjectHideFlags: 0
@@ -8683,6 +8699,7 @@ GameObject:
   - component: {fileID: 7327661532044720622}
   - component: {fileID: 7604166192050265555}
   - component: {fileID: 5440044379383973312}
+  - component: {fileID: 2941350516201709206}
   m_Layer: 0
   m_Name: Falcon 9 - Stage 1
   m_TagString: Untagged
@@ -8802,6 +8819,25 @@ MonoBehaviour:
   isPlayer: 0
   Throttle: 0
   Steer: 0
+  LegsDeployed: 0
+  FinsDeployed: 0
+--- !u!114 &2941350516201709206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773001410065149818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedadb72f1835484183d78d16d4e05eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 50
+  diameter: 3.66
+  dragCoefficient: 0.5
+  liftCoefficient: 0.2
+  airDensity: 1.225
 --- !u!1 &8773380165955977972
 GameObject:
   m_ObjectHideFlags: 0
