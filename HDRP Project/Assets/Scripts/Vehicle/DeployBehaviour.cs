@@ -32,6 +32,7 @@ public class DeployBehaviour : MonoBehaviour
         if (isDeployed)
         {
             transform.localRotation = defaultRotation * Quaternion.Euler(relativeRotation);
+            rotationController = new LerpedRotation(transform, acceleration, maxRotationSpeed);
         }
     }
 

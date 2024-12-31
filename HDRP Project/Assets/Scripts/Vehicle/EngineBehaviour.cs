@@ -41,7 +41,7 @@ public class EngineBehaviour : MonoBehaviour
         if (rotationController.acceleration != GimbalAcceleration) rotationController.acceleration = GimbalAcceleration;
 
         Quaternion targetRotation = defaultRotation;
-        if (state.Throttle >= 0f && Stage.gameObject.activeSelf)
+        if (state.Throttle > 0f && Stage.gameObject.activeSelf)
         {
             targetRotation *= Quaternion.Euler(GimbalAxis * GimbalRange * state.Steer);
             var firePos = FireVFX.transform.localPosition;

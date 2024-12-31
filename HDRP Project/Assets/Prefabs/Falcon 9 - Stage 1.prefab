@@ -9627,10 +9627,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6209908576003867152}
     m_Modifications:
-    - target: {fileID: 1554108587470130511, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 2053583067306098826, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: moveWithTransform
       value: 0
@@ -9638,10 +9634,6 @@ PrefabInstance:
     - target: {fileID: 2104151986909611599, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: moveWithTransform
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2359408214380708955, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 2375201039106683625, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: moveWithTransform
@@ -9651,18 +9643,6 @@ PrefabInstance:
       propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3415927245348612235, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4765668986698542331, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5002624857657970101, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 6100407400656749137, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: moveWithTransform
       value: 0
@@ -9671,17 +9651,9 @@ PrefabInstance:
       propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7326915200721114938, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 7362873326358193859, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: moveWithTransform
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8274860978047510816, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: m_LocalScale.x
@@ -9746,10 +9718,6 @@ PrefabInstance:
     - target: {fileID: 8829451551789304543, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8829451551789304543, guid: e91fa0fac941e714e8c4d5709097019f, type: 3}
-      propertyPath: m_RendererPriority
-      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
