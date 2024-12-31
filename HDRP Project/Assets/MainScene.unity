@@ -589,6 +589,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0.00000006618795
       objectReference: {fileID: 0}
+    - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70693415
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70727944
+      objectReference: {fileID: 0}
     - target: {fileID: 8773001410065149818, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
       propertyPath: m_Name
       value: Falcon 9 - Stage 1 (1)
@@ -722,6 +730,10 @@ PrefabInstance:
       propertyPath: isDeployed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7327661532044720622, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.00000006622028
@@ -729,6 +741,14 @@ PrefabInstance:
     - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.00000006618795
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70693415
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193636788575494030, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70727944
       objectReference: {fileID: 0}
     - target: {fileID: 8773001410065149818, guid: 9adb10c059f49cf4586151820cd3972c, type: 3}
       propertyPath: m_Name

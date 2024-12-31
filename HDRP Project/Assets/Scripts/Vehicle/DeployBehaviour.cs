@@ -2,23 +2,67 @@ using UnityEngine;
 
 public class DeployBehaviour : MonoBehaviour
 {
+    public Vector3 relativeRotation = new Vector3(0, 0, -115);
+    public float maxRotationSpeed = 45f;
+    public float acceleration = 15f;
     public bool isDeployed = false;
-    public Vector3 deployVector = new Vector3(0, 0, -115);
+    public float randomSpeedModifier = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Quaternion defaultRotation;
+    private Quaternion startRotation;
+    private Quaternion targetRotation;
+    private bool isRotating = false;
+    private bool _isDeployed;
+    private LerpedRotation rotationController;
+
+    public void Start()
     {
+        rotationController = new LerpedRotation(transform, acceleration, maxRotationSpeed);
+        defaultRotation = transform.rotation;
+        _isDeployed = isDeployed;
         if (isDeployed)
         {
-            var euler = transform.localEulerAngles;
-            euler += deployVector;
-            transform.localEulerAngles = euler;
+            transform.rotation = defaultRotation * Quaternion.Euler(relativeRotation);
         }
     }
 
-    // Update is called once per frame
+    public void Deploy()
+    {
+        if (!isRotating)
+        {
+            isRotating = true;
+            rotationController.currentSpeed = maxRotationSpeed * randomSpeedModifier * Random.value;
+            startRotation = transform.rotation;
+            targetRotation = defaultRotation * Quaternion.Euler(relativeRotation);
+            _isDeployed = true;
+        }
+    }
+
+    public void Retract()
+    {
+        if (!isRotating)
+        {
+            isRotating = true;
+            rotationController.currentSpeed = maxRotationSpeed * randomSpeedModifier * Random.value;
+            startRotation = transform.rotation;
+            targetRotation = defaultRotation;
+            _isDeployed = false;
+        }
+    }
+
     void Update()
     {
-        // todo deploy logic
+        if (rotationController.maxRotationSpeed != maxRotationSpeed) rotationController.maxRotationSpeed = maxRotationSpeed;
+        if (rotationController.acceleration != acceleration) rotationController.acceleration = acceleration;
+
+        if (isRotating)
+        {
+            isRotating = rotationController.RotateWithAcceleration(startRotation, targetRotation);
+        }
+        else if (isDeployed != _isDeployed)
+        {
+            if (isDeployed) Deploy();
+            else Retract();
+        }
     }
 }
