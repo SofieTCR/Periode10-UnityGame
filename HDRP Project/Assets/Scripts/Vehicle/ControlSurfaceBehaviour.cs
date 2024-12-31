@@ -32,6 +32,7 @@ public class ControlSurfaceBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!Stage.gameObject.activeSelf) return;
         if (rotationController.maxRotationSpeed != ActuationSpeed) rotationController.maxRotationSpeed = ActuationSpeed;
         if (rotationController.acceleration != ActuationAcceleration) rotationController.acceleration = ActuationAcceleration;
 

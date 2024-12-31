@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeployBehaviour : MonoBehaviour
@@ -12,18 +14,25 @@ public class DeployBehaviour : MonoBehaviour
     private Quaternion startRotation;
     private Quaternion targetRotation;
     private bool isRotating = false;
-    private bool _isDeployed;
+    private bool? _isDeployed = null;
     private LerpedRotation rotationController;
 
     public void Start()
     {
         defaultRotation = transform.localRotation;
+        rotationController = new LerpedRotation(transform, acceleration, maxRotationSpeed);
+        StartCoroutine(AfterStart());
+    }
+
+    private IEnumerator AfterStart()
+    {
+        yield return null;
+
         _isDeployed = isDeployed;
         if (isDeployed)
         {
             transform.localRotation = defaultRotation * Quaternion.Euler(relativeRotation);
         }
-        rotationController = new LerpedRotation(transform, acceleration, maxRotationSpeed);
     }
 
     public void Deploy()
@@ -52,6 +61,7 @@ public class DeployBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (_isDeployed == null) return;
         if (rotationController.maxRotationSpeed != maxRotationSpeed) rotationController.maxRotationSpeed = maxRotationSpeed;
         if (rotationController.acceleration != acceleration) rotationController.acceleration = acceleration;
 

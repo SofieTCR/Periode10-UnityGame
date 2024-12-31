@@ -1,4 +1,4 @@
-//  A simple Unity C# script for orbital movement around a target gameobject
+//  A simple Unity C# script for orbital movement around a LevelManager.PlayerObject gameobject
 //  Author: Ashkan Ashtiani
 //  Gist on Github: https://gist.github.com/3dln/c16d000b174f7ccf6df9a1cb0cef7f80
 
@@ -9,7 +9,7 @@ namespace TDLN.CameraControllers
 {
     public class CameraOrbit : MonoBehaviour
     {
-        public GameObject target;
+        public Vector3 cameraOffset = new Vector3();
         public float distance = 10.0f;
 
         public float xSpeed = 250.0f;
@@ -32,10 +32,10 @@ namespace TDLN.CameraControllers
 
         void LateUpdate()
         {
-            if (target == null) return;
+            if (LevelManager.PlayerObject == null) return;
             if (distance < 2) distance = 2;
-            distance -= Input.GetAxis("Mouse ScrollWheel") * 20;
-            if (target && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
+            distance -= Input.GetAxis("Mouse ScrollWheel") * 35;
+            if (LevelManager.PlayerObject && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
             {
                 var pos = Input.mousePosition;
                 var dpiScale = 1f;
@@ -54,7 +54,7 @@ namespace TDLN.CameraControllers
 
                 y = ClampAngle(y, yMinLimit, yMaxLimit);
                 var rotation = Quaternion.Euler(y, x, 0);
-                var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
+                var position = rotation * new Vector3(0.0f, 0.0f, -distance) + LevelManager.PlayerObject.transform.position + cameraOffset;
                 transform.rotation = rotation;
                 transform.position = position;
 
@@ -68,7 +68,7 @@ namespace TDLN.CameraControllers
 
             prevDistance = distance;
             var rot = Quaternion.Euler(y, x, 0);
-            var po = rot * new Vector3(0.0f, 0.0f, -distance) + target.transform.position;
+            var po = rot * new Vector3(0.0f, 0.0f, -distance) + LevelManager.PlayerObject.transform.position + cameraOffset;
             transform.rotation = rot;
             transform.position = po;
         }

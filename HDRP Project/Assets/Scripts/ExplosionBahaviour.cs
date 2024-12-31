@@ -41,10 +41,10 @@ public class ExplosionBahaviour : MonoBehaviour
         fireVFX.localScale = new Vector3(scale, scale, scale);
     }
 
-    private float EvalutateCurve(Dictionary<float, float> floatCurve, float time)
+    public static float EvalutateCurve(Dictionary<float, float> floatCurve, float time)
     {
         if (time < floatCurve.Keys.First()) return 0f;
-        if (time > floatCurve.Keys.Last()) return floatCurve[floatCurve.Keys.Last()];
+        if (time >= floatCurve.Keys.Last()) return floatCurve[floatCurve.Keys.Last()];
         KeyValuePair<float, float> start = new KeyValuePair<float, float>();
         KeyValuePair<float, float> end = new KeyValuePair<float, float>();
 

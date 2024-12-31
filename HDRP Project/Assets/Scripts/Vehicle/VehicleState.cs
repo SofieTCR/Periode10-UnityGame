@@ -16,7 +16,7 @@ public class VehicleState : MonoBehaviour
     private bool _legsDeployed;
     private bool _finsDeployed;
 
-    void Awake()
+    void Start()
     {
         var Deployables = gameObject.GetComponentsInChildren<DeployBehaviour>();
         LandingLegs = Deployables.Where(d => d.gameObject.name.Contains("leg", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
