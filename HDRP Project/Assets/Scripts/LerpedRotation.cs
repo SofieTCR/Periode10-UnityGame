@@ -22,7 +22,8 @@ public class LerpedRotation
         {
             isRotating = false;
             currentSpeed = 0f;
-            rotationTransform.rotation = targetRotation;
+            rotationTransform.localRotation = targetRotation;
+            rotationProgress = 0f;
             return false;
         }
 
@@ -44,7 +45,7 @@ public class LerpedRotation
         float deltaRotation = currentSpeed * Time.deltaTime;
         rotationProgress += deltaRotation / totalRotationAngle;
 
-        rotationTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, rotationProgress);
+        rotationTransform.localRotation = Quaternion.Slerp(startRotation, targetRotation, rotationProgress);
 
         return true;
     }

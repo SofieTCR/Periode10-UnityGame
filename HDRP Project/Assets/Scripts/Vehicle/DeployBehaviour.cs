@@ -18,11 +18,11 @@ public class DeployBehaviour : MonoBehaviour
     public void Start()
     {
         rotationController = new LerpedRotation(transform, acceleration, maxRotationSpeed);
-        defaultRotation = transform.rotation;
+        defaultRotation = transform.localRotation;
         _isDeployed = isDeployed;
         if (isDeployed)
         {
-            transform.rotation = defaultRotation * Quaternion.Euler(relativeRotation);
+            transform.localRotation = defaultRotation * Quaternion.Euler(relativeRotation);
         }
     }
 
@@ -32,7 +32,7 @@ public class DeployBehaviour : MonoBehaviour
         {
             isRotating = true;
             rotationController.currentSpeed = maxRotationSpeed * randomSpeedModifier * Random.value;
-            startRotation = transform.rotation;
+            startRotation = transform.localRotation;
             targetRotation = defaultRotation * Quaternion.Euler(relativeRotation);
             _isDeployed = true;
         }
@@ -44,7 +44,7 @@ public class DeployBehaviour : MonoBehaviour
         {
             isRotating = true;
             rotationController.currentSpeed = maxRotationSpeed * randomSpeedModifier * Random.value;
-            startRotation = transform.rotation;
+            startRotation = transform.localRotation;
             targetRotation = defaultRotation;
             _isDeployed = false;
         }
