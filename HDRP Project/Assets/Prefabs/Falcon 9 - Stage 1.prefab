@@ -4233,7 +4233,7 @@ MonoBehaviour:
   GimbalRange: 12
   GimbalSpeed: 120
   GimbalAcceleration: 180
-  Thrust: 450000
+  Thrust: 350000
 --- !u!1 &4292728695725427561
 GameObject:
   m_ObjectHideFlags: 0
@@ -8944,7 +8944,7 @@ Rigidbody:
   m_GameObject: {fileID: 8773001410065149818}
   serializedVersion: 4
   m_Mass: 18000
-  m_Drag: 0
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 16.5, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -9005,6 +9005,7 @@ MonoBehaviour:
   Steer: 0
   LegsDeployed: 0
   FinsDeployed: 0
+  IsControllable: 1
 --- !u!114 &2941350516201709206
 MonoBehaviour:
   m_ObjectHideFlags: 0

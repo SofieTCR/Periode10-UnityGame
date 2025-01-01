@@ -6,6 +6,9 @@ using UnityEngine.Animations;
 
 public class DamageBahaviour : MonoBehaviour
 {
+    public class PartBreakEvent : UnityEngine.Events.UnityEvent<GameObject> { }
+    public PartBreakEvent OnPartBreak = new();
+
     public GameObject[] instabreakObjects = new GameObject[0];
     public GameObject[] tolerantObjects = new GameObject[0];
     public float NormalVelocityTolerance = 12f;
@@ -98,6 +101,7 @@ public class DamageBahaviour : MonoBehaviour
         RB.linearDamping = parentRB.linearDamping;
         RB.mass = 1000;
         parentRB.mass -= RB.mass;
+        OnPartBreak.Invoke(gameObject);
     }
 
     void DestroyGridfin(GameObject obj)
@@ -114,9 +118,10 @@ public class DamageBahaviour : MonoBehaviour
         RB.mass = 400;
         parentRB.mass -= RB.mass;
         parent.gameObject.AddComponent<MeshCollider>().convex = true;
+        OnPartBreak.Invoke(gameObject);
     }
 
-    void DestroyVehicle(Vector3 impactPos)
+    public void DestroyVehicle(Vector3 impactPos)
     {
         foreach (var tmpObj in instabreakObjects.Concat(tolerantObjects))
         {

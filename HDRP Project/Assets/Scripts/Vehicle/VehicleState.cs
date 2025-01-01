@@ -16,6 +16,9 @@ public class VehicleState : MonoBehaviour
         {
             float lowestPoint = float.MaxValue;
 
+            if (colliders == null)
+                colliders = GetComponentsInChildren<Collider>();
+
             foreach (Collider collider in colliders)
             {
                 Bounds bounds = collider.bounds;
@@ -41,6 +44,7 @@ public class VehicleState : MonoBehaviour
     private Rigidbody rb;
     private bool _legsDeployed;
     private bool _finsDeployed;
+    private DamageBahaviour db;
 
     void Start()
     {
@@ -49,8 +53,9 @@ public class VehicleState : MonoBehaviour
         Gridfins = Deployables.Where(d => d.gameObject.name.Contains("fin", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
         LandingLegs.ForEach(l => l.isDeployed = LegsDeployed); _legsDeployed = LegsDeployed;
         Gridfins.ForEach(f => f.isDeployed = FinsDeployed); _finsDeployed = FinsDeployed;
-        colliders = GetComponentsInChildren<Collider>();
         rb = GetComponent<Rigidbody>();
+        db = GetComponent<DamageBahaviour>();
+        db.OnPartBreak.AddListener(PartBreak);
     }
     void Update()
     {
@@ -81,5 +86,17 @@ public class VehicleState : MonoBehaviour
             Gridfins.ForEach(f => f.isDeployed = FinsDeployed);
             _finsDeployed = FinsDeployed;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (transform.position.y < -1) db.DestroyVehicle(transform.position);
+    }
+
+    private void PartBreak(GameObject arg0)
+    {
+        if (arg0 == gameObject) colliders = null;
+        // Remove all rotation and axis limits except roll, vehicle is dissasembling all bets are off.
+        rb.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 }

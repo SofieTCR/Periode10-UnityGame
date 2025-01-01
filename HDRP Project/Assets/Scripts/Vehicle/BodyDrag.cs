@@ -36,9 +36,9 @@ public class BodyDrag : MonoBehaviour
             RB.AddForce(dragForce);
             RB.AddForce(liftDirection * liftForceMagnitude);
             var drawPoint = transform.TransformPoint(new Vector3(0, 0, 10));
-            Debug.Log($"Speed: {Mathf.Round(speed * 100) / 100} m/s, AOA: {Mathf.Round(angleOfAttack * 100) / 100} degrees");
-            Debug.DrawLine(drawPoint, drawPoint + dragForce.normalized, Color.red, Time.fixedDeltaTime);
-            Debug.DrawLine(drawPoint, drawPoint + (liftDirection * liftForceMagnitude).normalized, Color.blue, Time.fixedDeltaTime);
+            //Debug.Log($"Speed: {Mathf.Round(speed * 100) / 100} m/s, AOA: {Mathf.Round(angleOfAttack * 100) / 100} degrees");
+            //Debug.DrawLine(drawPoint, drawPoint + dragForce.normalized, Color.red, Time.fixedDeltaTime);
+            //Debug.DrawLine(drawPoint, drawPoint + (liftDirection * liftForceMagnitude).normalized, Color.blue, Time.fixedDeltaTime);
         }
     }
 }
