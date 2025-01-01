@@ -145,6 +145,10 @@ public class VehicleState : MonoBehaviour
         if (arg0 == gameObject) colliders = null;
         // Remove all rotation and axis limits except roll, vehicle is dissasembling all bets are off.
         rb.constraints = RigidbodyConstraints.FreezeRotationY;
+        _isGrounded = false;
+        _distanceGrounded = null;
+        _velocityGrounded = null;
+        _angleGrounded = null;
     }
 
     private void OnCollisionEnter(Collision collision)

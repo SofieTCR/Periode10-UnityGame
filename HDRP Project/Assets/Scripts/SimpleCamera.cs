@@ -1,8 +1,6 @@
 //  A simple Unity C# script for orbital movement around a LevelManager.PlayerObject gameobject
 //  Author: Ashkan Ashtiani
 //  Gist on Github: https://gist.github.com/3dln/c16d000b174f7ccf6df9a1cb0cef7f80
-
-using System;
 using UnityEngine;
 
 namespace TDLN.CameraControllers
@@ -28,14 +26,17 @@ namespace TDLN.CameraControllers
             y = angles.x;
         }
 
-        float prevDistance;
-
         void LateUpdate()
         {
-            if (LevelManager.PlayerObject == null) return;
+            if (LevelManager.PlayerObject == null)
+            {
+                if (!Cursor.visible) Cursor.visible = true;
+                if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+                return;
+            }
+            distance -= Input.GetAxis("Mouse ScrollWheel") * 50;
             if (distance < 2) distance = 2;
-            distance -= Input.GetAxis("Mouse ScrollWheel") * 35;
-            if (LevelManager.PlayerObject && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
+            if (Input.GetMouseButton(1))
             {
                 var pos = Input.mousePosition;
                 var dpiScale = 1f;
@@ -66,7 +67,6 @@ namespace TDLN.CameraControllers
                 Cursor.lockState = CursorLockMode.None;
             }
 
-            prevDistance = distance;
             var rot = Quaternion.Euler(y, x, 0);
             var po = rot * new Vector3(0.0f, 0.0f, -distance) + LevelManager.PlayerObject.transform.position + cameraOffset;
             transform.rotation = rot;

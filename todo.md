@@ -7,4 +7,5 @@
  - [x] Clean up project
  - [] Locational audio
  - [] Phantom Forces from legs
- - [] Mouse dragging left click
+ - [x] Mouse dragging left click
+ - [x] Incorrect grounded state if something breaks off.
