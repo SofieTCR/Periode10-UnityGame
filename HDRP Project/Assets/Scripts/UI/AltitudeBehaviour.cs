@@ -7,7 +7,7 @@ public class AltitudeBehaviour : MonoBehaviour
 
     void Update()
     {
-        float altitude = LevelManager.PlayerState?.Altitude ?? 0f;
+        float altitude = LevelManager.PlayerObjectActive ? LevelManager.PlayerState.Altitude : 0f;
         UpdateFieldText(altitude);
     }
 

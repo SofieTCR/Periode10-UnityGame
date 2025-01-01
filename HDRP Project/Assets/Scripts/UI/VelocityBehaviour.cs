@@ -7,7 +7,7 @@ public class VelocityBehaviour : MonoBehaviour
 
     void Update()
     {
-        float velocity = LevelManager.PlayerState?.Velocity.magnitude ?? 0f;
+        float velocity = LevelManager.PlayerObjectActive ? LevelManager.PlayerState.Velocity.magnitude : 0f;
         UpdateFieldText(velocity);
     }
 

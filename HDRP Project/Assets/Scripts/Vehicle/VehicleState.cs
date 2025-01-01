@@ -11,6 +11,10 @@ public class VehicleState : MonoBehaviour
     public bool LegsDeployed;
     public bool FinsDeployed;
     public bool IsGrounded => _isGrounded;
+    public float? TimeGrounded => _timeGrounded;
+    public float? VelocityGrounded => _velocityGrounded;
+    public float? DistanceGrounded => _distanceGrounded;
+    public float? AngleGrounded => _angleGrounded;
     public float StableTimer = 2f;
     public float LinearMax = 0.5f;
     public float AngularMax = 0.01f;
@@ -61,6 +65,10 @@ public class VehicleState : MonoBehaviour
     private DamageBahaviour db;
     private EngineBehaviour eb;
     private bool _isGrounded;
+    private float _timeGrounded;
+    private float? _velocityGrounded;
+    private float? _distanceGrounded;
+    private float? _angleGrounded;
     private Queue<float> linearVelocities = new Queue<float>();
     private Queue<float> angularVelocities = new Queue<float>();
     private bool isControllable = true;
@@ -107,7 +115,8 @@ public class VehicleState : MonoBehaviour
                 float netForce = rb.mass * requiredDeceleration;
                 float requiredThrust = netForce + (rb.mass * gravity);
                 float throttle = requiredThrust / eb.Thrust;
-                Throttle = Mathf.Clamp(throttle, 0f, 1f);
+                if (Throttle != 0 || throttle > .95f) // Suicide burn... ish
+                    Throttle = Mathf.Clamp(throttle, 0f, 1f);
             }
             else Throttle = 0;
         }
@@ -140,7 +149,14 @@ public class VehicleState : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!IsGrounded && collision.gameObject.layer == 7) _isGrounded = true;
+        if (!IsGrounded && collision.gameObject.layer == 7)
+        {
+            _isGrounded = true;
+            _timeGrounded = Time.time;
+            if (_velocityGrounded == null) _velocityGrounded = collision.relativeVelocity.magnitude;
+            if (_distanceGrounded == null) _distanceGrounded = transform.TransformPoint(new Vector3()).magnitude; // TODO replace with actual target distance.
+            if (_angleGrounded == null) _angleGrounded = Quaternion.Angle(Quaternion.identity, transform.rotation);
+        }
     }
 
     private void OnCollisionExit(Collision collision)

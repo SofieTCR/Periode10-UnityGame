@@ -11,7 +11,7 @@ public class ThrottleSlider : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        slider.value = LevelManager.PlayerState?.Throttle ?? 0f;
+        slider.value = LevelManager.PlayerObjectActive ? LevelManager.PlayerState.Throttle : 0f;
 
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         UpdatePercentageText(slider.value);
@@ -19,14 +19,14 @@ public class ThrottleSlider : MonoBehaviour
 
     void Update()
     {
-        float throttle = LevelManager.PlayerState?.Throttle ?? 0f;
+        float throttle = LevelManager.PlayerObjectActive ? LevelManager.PlayerState.Throttle : 0f;
         slider.value = throttle;
         UpdatePercentageText(slider.value);
     }
 
     void OnSliderValueChanged(float value)
     {
-        if (LevelManager.PlayerState != null)
+        if (LevelManager.PlayerObjectActive)
             LevelManager.PlayerState.Throttle = value;
     }
 
