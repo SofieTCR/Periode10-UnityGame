@@ -1,13 +1,25 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
     public static GameObject PlayerObject;
     public static List<GameObject> LevelObjects = new List<GameObject>();
     public static LevelState CurrentLevel = LevelState.MainMenu;
+    private static VehicleState _playerState;
+    public static VehicleState PlayerState
+    {
+        get
+        {
+            if (PlayerObject == null || !PlayerObject.activeSelf) return null;
+            else if (_playerState == null)
+            {
+                _playerState = PlayerObject.GetComponent<VehicleState>();
+            }
+            return _playerState;
+        }
+    }
 
     public GameObject Falcon9;
 

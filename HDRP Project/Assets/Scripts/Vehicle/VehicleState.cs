@@ -9,10 +9,36 @@ public class VehicleState : MonoBehaviour
     public float Steer = 0f;
     public bool LegsDeployed;
     public bool FinsDeployed;
+    public bool IsControllable = true;
+    public float Altitude
+    {
+        get
+        {
+            float lowestPoint = float.MaxValue;
+
+            foreach (Collider collider in colliders)
+            {
+                Bounds bounds = collider.bounds;
+                lowestPoint = Mathf.Min(lowestPoint, bounds.min.y);
+            }
+
+            if (Physics.Raycast(new Vector3(transform.position.x, lowestPoint + 0.05f, transform.position.z), Vector3.down, out RaycastHit hit, Mathf.Infinity))
+            {
+                return hit.distance;
+            }
+            else
+            {
+                return Mathf.Infinity; // Impossible
+            }
+        }
+    }
+    public Vector3 Velocity => rb.linearVelocity;
 
     private float ThrottleResponseSpeed = 0.5f;
     private List<DeployBehaviour> LandingLegs;
     private List<DeployBehaviour> Gridfins;
+    private Collider[] colliders;
+    private Rigidbody rb;
     private bool _legsDeployed;
     private bool _finsDeployed;
 
@@ -23,6 +49,8 @@ public class VehicleState : MonoBehaviour
         Gridfins = Deployables.Where(d => d.gameObject.name.Contains("fin", System.StringComparison.InvariantCultureIgnoreCase)).ToList();
         LandingLegs.ForEach(l => l.isDeployed = LegsDeployed); _legsDeployed = LegsDeployed;
         Gridfins.ForEach(f => f.isDeployed = FinsDeployed); _finsDeployed = FinsDeployed;
+        colliders = GetComponentsInChildren<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
