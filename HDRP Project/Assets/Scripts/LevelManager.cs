@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     private TextMeshProUGUI OutcomeDist;
     private TextMeshProUGUI OutcomeVel;
     private TextMeshProUGUI OutcomeAngle;
+    private TextMeshProUGUI OutcomeAngleSign;
     private TextMeshProUGUI OutcomeScore;
 
     private void Start()
@@ -200,18 +201,59 @@ public class LevelManager : MonoBehaviour
 
     private void PopulateOutcomeUI()
     {
+        var succesfulLanding = PlayerObjectActive;
         if (OutcomeText == null) OutcomeText = OutcomeUI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-        OutcomeText.text = PlayerObjectActive ? "Succesful Landing" : "Catastrophic Failure";
-        OutcomeText.color = PlayerObjectActive ? Color.white : Color.red;
+        OutcomeText.text = succesfulLanding ? "Succesful Landing" : "Catastrophic Failure";
+        OutcomeText.color = succesfulLanding ? Color.white : Color.red;
 
         if (OutcomeDist == null) OutcomeDist = OutcomeUI.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>();
         OutcomeDist.text = $"{PlayerState.DistanceGrounded:F1}m";
+        if (succesfulLanding)
+        {
+            var colorValue = CalculatePoints(value: PlayerState.DistanceGrounded
+                                           , availablePoints: 2
+                                           , valueForMaxPoints: GameSettings.idealDistance
+                                           , valueForNoPoints: GameSettings.maxDistance);
+            OutcomeDist.color = new Color(Mathf.Min(2 - colorValue, 1), Mathf.Min(colorValue, 1), 0, 1);
+        }
+        else
+        {
+            OutcomeDist.color = Color.white;
+        }
 
         if (OutcomeVel == null) OutcomeVel = OutcomeUI.transform.GetChild(0).GetChild(5).GetComponent<TextMeshProUGUI>();
         OutcomeVel.text = $"{PlayerState.VelocityGrounded:F2}m/s";
+        if (succesfulLanding)
+        {
+            var colorValue = CalculatePoints(value: PlayerState.VelocityGrounded
+                                           , availablePoints: 2
+                                           , valueForMaxPoints: GameSettings.idealVelocity
+                                           , valueForNoPoints: GameSettings.maxVelocity);
+            OutcomeVel.color = new Color(Mathf.Min(2 - colorValue, 1), Mathf.Min(colorValue, 1), 0, 1);
+        }
+        else
+        {
+            OutcomeVel.color = Color.white;
+        }
 
         if (OutcomeAngle == null) OutcomeAngle = OutcomeUI.transform.GetChild(0).GetChild(7).GetComponent<TextMeshProUGUI>();
+        if (OutcomeAngleSign == null) OutcomeAngleSign = OutcomeUI.transform.GetChild(0).GetChild(8).GetComponent<TextMeshProUGUI>();
         OutcomeAngle.text = $"{PlayerState.AngleGrounded:F2}";
+        if (succesfulLanding)
+        {
+            var colorValue = CalculatePoints(value: PlayerState.AngleGrounded
+                                           , availablePoints: 2
+                                           , valueForMaxPoints: GameSettings.idealAngle
+                                           , valueForNoPoints: GameSettings.maxAngle);
+            var color = new Color(Mathf.Min(2 - colorValue, 1), Mathf.Min(colorValue, 1), 0, 1);
+            OutcomeAngle.color = color;
+            OutcomeAngleSign.color = color;
+        }
+        else
+        {
+            OutcomeAngle.color = Color.white;
+            OutcomeAngleSign.color = Color.white;
+        }
 
         if (PlayerObjectActive)
             Score += CalculateScore();
@@ -220,55 +262,42 @@ public class LevelManager : MonoBehaviour
     }
     private int CalculateScore()
     {
-        // Define scoring parameters
-        const int maxDistancePoints = 15;
-        const float maxDistance = 5.0f; // Distance in meters
-
-        const int maxVelocityPoints = 10;
-        const float maxVelocity = 6.0f; // Velocity in m/s
-        const float idealVelocity = 2.0f; // Velocity for max score
-
-        const int maxAnglePoints = 5;
-        const float maxAngle = 5.0f; // Angle in degrees
-        const float idealAngle = 2.0f; // Angle for max score
         int tmpScore = 0;
 
         // Distance scoring
-        if (PlayerState.DistanceGrounded != null)
-        {
-            float distance = PlayerState.DistanceGrounded.Value;
-            if (distance <= maxDistance)
-            {
-                float distanceFactor = 1.0f - (distance / maxDistance);
-                tmpScore += (int) (distanceFactor * maxDistancePoints);
-            }
-        }
+        tmpScore += Mathf.RoundToInt(CalculatePoints(value: PlayerState.DistanceGrounded
+                                                   , availablePoints: GameSettings.maxDistancePoints
+                                                   , valueForMaxPoints: GameSettings.idealDistance
+                                                   , valueForNoPoints: GameSettings.maxDistance));
 
         // Velocity scoring
-        if (PlayerState.VelocityGrounded != null)
-        {
-            float velocity = PlayerState.VelocityGrounded.Value;
-            if (velocity <= maxVelocity)
-            {
-                float velocityFactor = Math.Clamp(1.0f - ((velocity - idealVelocity) / (maxVelocity - idealVelocity)), 0.0f, 1.0f);
-                tmpScore += (int) (velocityFactor * maxVelocityPoints);
-            }
-        }
+        tmpScore += Mathf.RoundToInt(CalculatePoints(value: PlayerState.VelocityGrounded
+                                                   , availablePoints: GameSettings.maxVelocityPoints
+                                                   , valueForMaxPoints: GameSettings.idealVelocity
+                                                   , valueForNoPoints: GameSettings.maxVelocity));
 
         // Angle scoring
-        if (PlayerState.AngleGrounded != null)
-        {
-            float angle = PlayerState.AngleGrounded.Value;
-            if (angle <= maxAngle)
-            {
-                float angleFactor = Math.Clamp(1.0f - ((angle - idealAngle) / (maxAngle - idealAngle)), 0.0f, 1.0f);
-                tmpScore += (int) (angleFactor * maxAnglePoints);
-            }
-        }
+        tmpScore += Mathf.RoundToInt(CalculatePoints(value: PlayerState.AngleGrounded
+                                                   , availablePoints: GameSettings.maxAnglePoints
+                                                   , valueForMaxPoints: GameSettings.idealAngle
+                                                   , valueForNoPoints: GameSettings.maxAngle));
 
-        return Math.Max(0, tmpScore);
+        return tmpScore;
     }
 
+    private float CalculatePoints(float? value, float availablePoints, float valueForMaxPoints, float valueForNoPoints)
+    {
+        float tmpScore = 0f;
+        if (value != null)
+        {
+            if (value <= valueForNoPoints)
+            {
+                float angleFactor = Math.Clamp((float) (1.0f - ((value - valueForMaxPoints) / (valueForNoPoints - valueForMaxPoints))), 0.0f, 1.0f);
+                tmpScore += (angleFactor * availablePoints);
+            }
+        }
+        return tmpScore;
+    }
 }
 
 public enum LevelType

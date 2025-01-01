@@ -9,3 +9,6 @@
  - [] Phantom Forces from legs
  - [x] Mouse dragging left click
  - [x] Incorrect grounded state if something breaks off.
+ - [x] COlours in results tab
+ - [] Maybe hard mode with less throttle auth
+ - [] High score
