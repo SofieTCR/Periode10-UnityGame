@@ -1,6 +1,6 @@
  - [] Fix Z-Fighting on landingpads
  - [] Assign target pad to rocket
- - [] Investigate AI wonkiness
+ - [x] Investigate AI wonkiness
  - [] Investigate background sounds
  - [] Investigate wind noise
  - [] Investigate button hover stuff
@@ -12,3 +12,5 @@
  - [x] COlours in results tab
  - [] Maybe hard mode with less throttle auth
  - [] High score
+ - [] Make start level a coroutine, it sometimes splodes
+ - [x] Destroy explosion if the rocket it belongs to is destroyed

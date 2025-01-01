@@ -103,23 +103,6 @@ public class VehicleState : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.B))
                 FinsDeployed = !FinsDeployed;
         }
-        else if (isAI && isControllable)
-        {
-            if (!LegsDeployed && (Altitude < 50 || Altitude / Velocity.y < 6)) LegsDeployed = true;
-            if (!IsGrounded)
-            {
-                const float gravity = 9.81f; // Earth's gravitational acceleration (m/s^2)
-                const float touchdownSpeed = 2.5f;
-
-                float requiredDeceleration = (Mathf.Pow(Velocity.magnitude, 2) - Mathf.Pow(touchdownSpeed, 2)) / (2 * Altitude);
-                float netForce = rb.mass * requiredDeceleration;
-                float requiredThrust = netForce + (rb.mass * gravity);
-                float throttle = requiredThrust / eb.Thrust;
-                if (Throttle != 0 || throttle > .95f) // Suicide burn... ish
-                    Throttle = Mathf.Clamp(throttle, 0f, 1f);
-            }
-            else Throttle = 0;
-        }
 
         if (_legsDeployed != LegsDeployed)
         {
@@ -138,6 +121,28 @@ public class VehicleState : MonoBehaviour
         if (transform.position.y < -1) db.DestroyVehicle(transform.position);
         AddToBuffers();
         if (isControllable && IsStable) SafeVehicle();
+        if (isAI && isControllable)
+        {
+            if (!LegsDeployed && (Altitude < 50 || Altitude / Mathf.Abs(Velocity.y / 2) < 5.5f)) LegsDeployed = true;
+            if (!IsGrounded)
+            {
+                const float gravity = 9.81f; // Earth's gravitational acceleration (m/s^2)
+                const float touchdownSpeed = 2.5f;
+                const float minThrottleFiring = 0.2f;
+
+                // Velocity we can slow to 2.5m/s from at 90% thrust
+                float possibleSlowVelocity = Mathf.Sqrt(Mathf.Pow(touchdownSpeed, 2) + 2 * (eb.Thrust * 0.9f / rb.mass - gravity) * Altitude);
+                float velDiff = Velocity.magnitude - possibleSlowVelocity + touchdownSpeed;
+
+                float requiredAccel = gravity + velDiff / (Time.fixedDeltaTime * 10); // Fifth of a second to reach the target velocity (hopefully stops rapid throttle switching)
+                float requiredThrust = rb.mass * requiredAccel;
+
+                float throttleSetting = Mathf.Clamp(requiredThrust / eb.Thrust, minThrottleFiring, 1f);
+                if (Throttle != 0 || throttleSetting == 1) // Suicide burn... ish
+                    Throttle = throttleSetting;
+            }
+            else Throttle = 0;
+        }
     }
 
     private void PartBreak(GameObject arg0)

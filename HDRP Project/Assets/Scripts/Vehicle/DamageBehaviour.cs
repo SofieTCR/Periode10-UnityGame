@@ -129,7 +129,7 @@ public class DamageBahaviour : MonoBehaviour
         }
         gameObject.SetActive(false);
         var destroyedBits = Instantiate(destroyedPrefab, transform.position, transform.rotation);
-        Instantiate(firePrefab, impactPos, Quaternion.identity);
+        looseParts.Add(Instantiate(firePrefab, impactPos, Quaternion.identity));
         foreach (var rb in destroyedBits.GetComponentsInChildren<Rigidbody>()) looseParts.Add(rb.gameObject);
         Destroy(gameObject, GameSettings.TimeBetweenLevels);
         Destroy(destroyedBits, GameSettings.TimeBetweenLevels);
@@ -138,12 +138,12 @@ public class DamageBahaviour : MonoBehaviour
         foreach (var part in looseParts)
         {
             var rb = part.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(8e2f, explosionOrigin, 100f, 0, ForceMode.Acceleration);
+            if (rb != null) rb.AddExplosionForce(8e2f, explosionOrigin, 100f, 0, ForceMode.Acceleration);
         }
     }
 
     private void OnDestroy()
     {
-        foreach (var obj in looseParts) Destroy(obj);
+        foreach (var obj in looseParts) if (obj != null) Destroy(obj);
     }
 }

@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
             StartLevel(LevelType.MainMenu);
         }
     }
-
+    [ContextMenu("Next Level")]
     public void StartNextLevel()
     {
         ClearLevel();
