@@ -5,11 +5,25 @@ using UnityEngine;
 public class VehicleState : MonoBehaviour
 {
     public bool isPlayer = false;
+    public bool isAI = false;
     public float Throttle = 0f;
     public float Steer = 0f;
     public bool LegsDeployed;
     public bool FinsDeployed;
-    public bool IsControllable = true;
+    public bool IsGrounded => _isGrounded;
+    public float StableTimer = 2f;
+    public float LinearMax = 0.5f;
+    public float AngularMax = 0.01f;
+    public bool IsStable
+    {
+        get
+        {
+            if (!IsGrounded) return false;
+            if (linearVelocities.Average() >= LinearMax) return false;
+            if (angularVelocities.Average() >= AngularMax) return false;
+            return true;
+        }
+    }
     public float Altitude
     {
         get
@@ -45,6 +59,11 @@ public class VehicleState : MonoBehaviour
     private bool _legsDeployed;
     private bool _finsDeployed;
     private DamageBahaviour db;
+    private EngineBehaviour eb;
+    private bool _isGrounded;
+    private Queue<float> linearVelocities = new Queue<float>();
+    private Queue<float> angularVelocities = new Queue<float>();
+    private bool isControllable = true;
 
     void Start()
     {
@@ -55,11 +74,12 @@ public class VehicleState : MonoBehaviour
         Gridfins.ForEach(f => f.isDeployed = FinsDeployed); _finsDeployed = FinsDeployed;
         rb = GetComponent<Rigidbody>();
         db = GetComponent<DamageBahaviour>();
+        eb = GetComponentInChildren<EngineBehaviour>();
         db.OnPartBreak.AddListener(PartBreak);
     }
     void Update()
     {
-        if (isPlayer)
+        if (isPlayer && isControllable)
         {
             if (Input.GetKey(KeyCode.LeftControl)) Throttle = Mathf.Max(0f, Throttle -= ThrottleResponseSpeed * Time.deltaTime);
             if (Input.GetKey(KeyCode.LeftShift)) Throttle = Mathf.Min(1f, Throttle += ThrottleResponseSpeed * Time.deltaTime);
@@ -74,6 +94,22 @@ public class VehicleState : MonoBehaviour
                 LegsDeployed = !LegsDeployed;
             if (Input.GetKeyDown(KeyCode.B))
                 FinsDeployed = !FinsDeployed;
+        }
+        else if (isAI && isControllable)
+        {
+            if (!LegsDeployed && (Altitude < 50 || Altitude / Velocity.y < 6)) LegsDeployed = true;
+            if (!IsGrounded)
+            {
+                const float gravity = 9.81f; // Earth's gravitational acceleration (m/s^2)
+                const float touchdownSpeed = 2.5f;
+
+                float requiredDeceleration = (Mathf.Pow(Velocity.magnitude, 2) - Mathf.Pow(touchdownSpeed, 2)) / (2 * Altitude);
+                float netForce = rb.mass * requiredDeceleration;
+                float requiredThrust = netForce + (rb.mass * gravity);
+                float throttle = requiredThrust / eb.Thrust;
+                Throttle = Mathf.Clamp(throttle, 0f, 1f);
+            }
+            else Throttle = 0;
         }
 
         if (_legsDeployed != LegsDeployed)
@@ -91,6 +127,8 @@ public class VehicleState : MonoBehaviour
     private void FixedUpdate()
     {
         if (transform.position.y < -1) db.DestroyVehicle(transform.position);
+        AddToBuffers();
+        if (isControllable && IsStable) SafeVehicle();
     }
 
     private void PartBreak(GameObject arg0)
@@ -98,5 +136,30 @@ public class VehicleState : MonoBehaviour
         if (arg0 == gameObject) colliders = null;
         // Remove all rotation and axis limits except roll, vehicle is dissasembling all bets are off.
         rb.constraints = RigidbodyConstraints.FreezeRotationY;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!IsGrounded && collision.gameObject.layer == 7) _isGrounded = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (IsGrounded && collision.gameObject.layer == 7) _isGrounded = false;
+    }
+
+    private void AddToBuffers()
+    {
+        linearVelocities.Enqueue(rb.linearVelocity.magnitude);
+        while (linearVelocities.Count > 0 && linearVelocities.Count * Time.fixedDeltaTime > StableTimer) linearVelocities.Dequeue();
+        angularVelocities.Enqueue(rb.angularVelocity.magnitude);
+        while (angularVelocities.Count > 0 && angularVelocities.Count * Time.fixedDeltaTime > StableTimer) angularVelocities.Dequeue();
+    }
+
+    private void SafeVehicle()
+    {
+        Throttle = 0;
+        Steer = 0;
+        isControllable = false;
     }
 }
