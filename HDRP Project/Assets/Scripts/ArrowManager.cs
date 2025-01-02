@@ -5,10 +5,11 @@ public class ArrowManager : MonoBehaviour
     public GameObject arrowPrefab;
     public Camera mainCamera;
     public float arrowHeight = 5f;
-    public float arrowDistanceScale;
 
     private GameObject[] arrows;
     private Vector3[] relativePositions;
+    private float pulseSpeed = 2f;
+    private float pulseAmplitude = 5f;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class ArrowManager : MonoBehaviour
         if (LevelManager.PlayerObjectActive && LevelManager.PlayerState.TargetLandingZone != null)
         {
             var landingZonePosition = LevelManager.PlayerState.TargetLandingZone.transform.position;
+
             if (arrows == null)
             {
                 arrows = new GameObject[4];
@@ -35,13 +37,18 @@ public class ArrowManager : MonoBehaviour
                     arrows[i].transform.LookAt(landingZonePosition, Vector3.up);
                 }
             }
+
             float distance = Vector3.Distance(LevelManager.PlayerState.TargetLandingZone.transform.position, mainCamera.transform.position);
             float scaleFactor = distance / 35.0f;
             var scale = Vector3.one * Mathf.Clamp(scaleFactor, 3, 50);
-            foreach (var arrow in arrows)
+            float pulseOffset = Mathf.Sin(Time.time * pulseSpeed) * pulseAmplitude;
+
+            for (int i = 0; i < arrows.Length; i++)
             {
-                arrow.transform.localScale = scale;
-                
+                if (!arrows[i].activeSelf) arrows[i].SetActive(true);
+                var pulsingPosition = relativePositions[i] + (relativePositions[i].normalized * pulseOffset);
+                arrows[i].transform.position = landingZonePosition + pulsingPosition;
+                arrows[i].transform.localScale = scale;
             }
         }
         else if (arrows != null)
