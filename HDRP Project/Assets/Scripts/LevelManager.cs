@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
             case LevelType.MainMenu:
                 LevelObjects.Add(SpawnFalcon9(position: new Vector3(-350, 250, 100)
                                             , rotation: Quaternion.identity
-                                            , velocity: new Vector3(0, -45, 0)
+                                            , velocity: new Vector3(0, -53f, 0)
                                             , angularVelocity: new Vector3(0, 0, 0)
                                             , isPlayer: false
                                             , isAI: true

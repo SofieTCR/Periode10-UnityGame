@@ -138,7 +138,7 @@ public class DamageBahaviour : MonoBehaviour
         foreach (var part in looseParts)
         {
             var rb = part.GetComponent<Rigidbody>();
-            if (rb != null) rb.AddExplosionForce(8e2f, explosionOrigin, 100f, 0, ForceMode.Acceleration);
+            if (rb != null) rb.AddExplosionForce(6.5e2f, explosionOrigin, 100f, 0, ForceMode.Acceleration);
         }
     }
 

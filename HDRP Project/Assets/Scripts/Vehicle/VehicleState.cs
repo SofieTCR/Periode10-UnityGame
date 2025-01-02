@@ -124,7 +124,7 @@ public class VehicleState : MonoBehaviour
         if (isControllable && IsStable) SafeVehicle();
         if (isAI && isControllable)
         {
-            if (!LegsDeployed && (Altitude < 50 || Altitude / Mathf.Abs(Velocity.y / 2) < 5.5f)) LegsDeployed = true;
+            if (!LegsDeployed && (Altitude < 50 || Altitude / Mathf.Abs(Velocity.y / 2) < 5f)) LegsDeployed = true;
             if (!IsGrounded)
             {
                 const float gravity = 9.81f; // Earth's gravitational acceleration (m/s^2)
