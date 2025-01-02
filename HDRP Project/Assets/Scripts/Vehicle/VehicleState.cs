@@ -54,6 +54,7 @@ public class VehicleState : MonoBehaviour
         }
     }
     public Vector3 Velocity => rb.linearVelocity;
+    public GameObject TargetLandingZone;
 
     private float ThrottleResponseSpeed = 0.5f;
     private List<DeployBehaviour> LandingLegs;
@@ -163,7 +164,7 @@ public class VehicleState : MonoBehaviour
             _isGrounded = true;
             _timeGrounded = Time.time;
             if (_velocityGrounded == null) _velocityGrounded = collision.relativeVelocity.magnitude;
-            if (_distanceGrounded == null) _distanceGrounded = transform.TransformPoint(new Vector3()).magnitude; // TODO replace with actual target distance.
+            if (_distanceGrounded == null && TargetLandingZone != null) _distanceGrounded = Mathf.Abs(TargetLandingZone.transform.position.z - transform.position.z);
             if (_angleGrounded == null) _angleGrounded = Quaternion.Angle(Quaternion.identity, transform.rotation);
         }
     }

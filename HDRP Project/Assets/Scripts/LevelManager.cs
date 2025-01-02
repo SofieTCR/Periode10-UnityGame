@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using System.Text.RegularExpressions;
-using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
             return _playerState;
         }
     }
-    public static bool PlayerObjectActive => PlayerObject?.activeSelf ?? false;
+    public static bool PlayerObjectActive => PlayerObject != null ? PlayerObject.activeSelf : false;
 
 
     private Vector3 cameraPosition;
@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject Camera;
     public GameObject Falcon9;
+    public List<GameObject> LandingZones = new List<GameObject>();
     public GameObject RocketUI;
     public GameObject OutcomeUI;
     public GameObject MainMenuUI;
@@ -44,18 +45,18 @@ public class LevelManager : MonoBehaviour
     private TextMeshProUGUI OutcomeAngle;
     private TextMeshProUGUI OutcomeAngleSign;
     private TextMeshProUGUI OutcomeScore;
+    private Coroutine StartLevelRoutine;
 
     private void Start()
     {
         cameraPosition = Camera.transform.position;
         cameraRotation = Camera.transform.rotation;
-        StartLevel(LevelType.MainMenu);
+        StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
     }
 
     private void Update()
     {
-        
-        if (PlayerObject != null && !OutcomeUI.activeSelf && PlayerState.IsGrounded && Time.time >= PlayerState.TimeGrounded + GameSettings.TimeBetweenLevels / 4)
+        if (PlayerObject != null && !OutcomeUI.activeSelf && (!PlayerObjectActive || PlayerState.IsStable) && Time.time >= PlayerState.TimeGrounded + GameSettings.TimeBetweenLevels / 4)
         {
             PopulateOutcomeUI();
             OutcomeUI.SetActive(true);
@@ -64,11 +65,11 @@ public class LevelManager : MonoBehaviour
         {
             StartNextLevel();
         }
-        else if (PlayerObject == null && CurrentLevel != LevelType.MainMenu)
+        else if (PlayerObject == null && CurrentLevel != LevelType.MainMenu && StartLevelRoutine == null)
         {
             // TODO: save score
             ClearLevel();
-            StartLevel(LevelType.MainMenu);
+            StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
         }
     }
     [ContextMenu("Next Level")]
@@ -76,13 +77,14 @@ public class LevelManager : MonoBehaviour
     {
         ClearLevel();
         if (Enum.IsDefined(typeof(LevelType), CurrentLevel + 1))
-            StartLevel(CurrentLevel + 1);
+            StartLevelRoutine = StartCoroutine(StartLevel(CurrentLevel + 1));
         else
-            StartLevel(LevelType.MainMenu);
+            StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
     }
 
-    private void StartLevel(LevelType level)
+    private IEnumerator StartLevel(LevelType level)
     {
+        yield return new WaitForEndOfFrame();
         switch (level)
         {
             case LevelType.MainMenu:
@@ -107,6 +109,7 @@ public class LevelManager : MonoBehaviour
                                           , rotation: Quaternion.identity
                                           , velocity: new Vector3(0, -150, 0)
                                           , angularVelocity: new Vector3(0, 0, 0)
+                                          , targetLZ: LandingZones[2]
                                           , isPlayer: true
                                           , legsDeployed: false
                                           , finsDeployed: true);
@@ -124,6 +127,7 @@ public class LevelManager : MonoBehaviour
                                           , rotation: Quaternion.Euler(-7.5f, 0, 0)
                                           , velocity: new Vector3(0, -150, 20)
                                           , angularVelocity: new Vector3(0, 0, 0)
+                                          , targetLZ: LandingZones[0]
                                           , isPlayer: true
                                           , legsDeployed: false
                                           , finsDeployed: true);
@@ -160,6 +164,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Starting level: " + level.ToString());
         CurrentLevel = level;
         if (LevelText != null) LevelText.text = Regex.Replace(level.ToString(), "([a-z])([A-Z0-9])" , "$1 $2");
+        StartLevelRoutine = null;
     }
 
     private void ClearLevel()
@@ -176,6 +181,7 @@ public class LevelManager : MonoBehaviour
                                   , Quaternion rotation
                                   , Vector3 velocity = new Vector3()
                                   , Vector3 angularVelocity = new Vector3()
+                                  , GameObject targetLZ = null
                                   , bool isPlayer = false
                                   , bool isAI = false
                                   , bool legsDeployed = false
@@ -195,6 +201,7 @@ public class LevelManager : MonoBehaviour
         state.isAI = isAI;
         state.LegsDeployed = legsDeployed;
         state.FinsDeployed = finsDeployed;
+        state.TargetLandingZone = targetLZ;
 
         return tmpObj;
     }
