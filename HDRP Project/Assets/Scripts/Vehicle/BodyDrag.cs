@@ -7,6 +7,7 @@ public class BodyDrag : MonoBehaviour
     public float dragCoefficient = 0.75f;
     public float liftCoefficient = 0.35f;
     public float airDensity = 1.225f;    // Air density at sea level (kg/m�)
+    public AudioSource Audio;
 
     private float frontalArea;
     private float sideArea;
@@ -39,6 +40,8 @@ public class BodyDrag : MonoBehaviour
             //Debug.Log($"Speed: {Mathf.Round(speed * 100) / 100} m/s, AOA: {Mathf.Round(angleOfAttack * 100) / 100} degrees");
             //Debug.DrawLine(drawPoint, drawPoint + dragForce.normalized, Color.red, Time.fixedDeltaTime);
             //Debug.DrawLine(drawPoint, drawPoint + (liftDirection * liftForceMagnitude).normalized, Color.blue, Time.fixedDeltaTime);
+            Audio.volume = Mathf.Clamp(airDensity * speed / 120, 0, 1.25f);
         }
+        else if (Audio != null && Audio.volume != 0) Audio.volume = 0; 
     }
 }

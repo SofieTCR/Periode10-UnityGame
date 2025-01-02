@@ -2,10 +2,10 @@
  - [x] Assign target pad to rocket
  - [x] Investigate AI wonkiness
  - [] Investigate background sounds
- - [] Investigate wind noise
- - [] Investigate button hover stuff
+ - [x] Investigate wind noise
+ - [x] Investigate button hover stuff
  - [x] Clean up project
- - [] Locational audio
+ - [x] Locational audio
  - [] Phantom Forces from legs
  - [x] Mouse dragging left click
  - [x] Incorrect grounded state if something breaks off.
@@ -15,4 +15,4 @@
  - [x] Make start level a coroutine, it sometimes splodes
  - [x] Destroy explosion if the rocket it belongs to is destroyed
  - [x] Show Target
- - [] Investigate shadow distance
+ - [x] Investigate shadow distance, nothing i can do
