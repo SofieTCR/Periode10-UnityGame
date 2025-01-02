@@ -11,7 +11,8 @@
  - [x] Incorrect grounded state if something breaks off.
  - [x] COlours in results tab
  - [] Maybe hard mode with less throttle auth
- - [] High score
+ - [x] High score
  - [x] Make start level a coroutine, it sometimes splodes
  - [x] Destroy explosion if the rocket it belongs to is destroyed
  - [x] Show Target
+ - [] Investigate shadow distance

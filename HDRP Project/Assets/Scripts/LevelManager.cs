@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
     private TextMeshProUGUI OutcomeAngle;
     private TextMeshProUGUI OutcomeAngleSign;
     private TextMeshProUGUI OutcomeScore;
+    private TextMeshProUGUI MenuHighScore;
     private Coroutine StartLevelRoutine;
 
     private void Start()
@@ -67,7 +68,6 @@ public class LevelManager : MonoBehaviour
         }
         else if (PlayerObject == null && CurrentLevel != LevelType.MainMenu && StartLevelRoutine == null)
         {
-            // TODO: save score
             ClearLevel();
             StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
         }
@@ -152,7 +152,9 @@ public class LevelManager : MonoBehaviour
             if (!MainMenuUI.activeSelf) MainMenuUI.SetActive(true);
             if (RocketUI.activeSelf) RocketUI.SetActive(false);
             if (OutcomeUI.activeSelf) OutcomeUI.SetActive(false);
+            SetHighScore(Score);
             Score = 0;
+            GetHighScore();
         }
         else
         {
@@ -304,6 +306,23 @@ public class LevelManager : MonoBehaviour
             }
         }
         return tmpScore;
+    }
+
+    public static void SetHighScore(int score)
+    {
+        int currentHighScore = PlayerPrefs.GetInt(GameSettings.HighScoreKey, 0);
+        if (score > currentHighScore)
+        {
+            PlayerPrefs.SetInt(GameSettings.HighScoreKey, score);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public void GetHighScore()
+    {
+        var highScore = PlayerPrefs.GetInt(GameSettings.HighScoreKey, 0);
+        if (MenuHighScore == null) MenuHighScore = MainMenuUI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        MenuHighScore.text = highScore.ToString();
     }
 }
 

@@ -1,6 +1,7 @@
 public class GameSettings
 {
-    public static float TimeBetweenLevels = 20f;
+    public const float TimeBetweenLevels = 20f;
+    public const string HighScoreKey = "LandTheBooster_HS";
 
     public const int maxDistancePoints = 15;
     public const float idealDistance = 0f; // Distance for max score
