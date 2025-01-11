@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
     private TextMeshProUGUI OutcomeAngle;
     private TextMeshProUGUI OutcomeAngleSign;
     private TextMeshProUGUI OutcomeScore;
+    private TextMeshProUGUI OutcomeSkipText;
     private TextMeshProUGUI MenuHighScore;
     private Coroutine StartLevelRoutine;
 
@@ -62,11 +63,11 @@ public class LevelManager : MonoBehaviour
             PopulateOutcomeUI();
             OutcomeUI.SetActive(true);
         }
-        else if (PlayerObject != null && PlayerState.IsStable && Time.time >= PlayerState.TimeGrounded + GameSettings.TimeBetweenLevels)
+        else if (PlayerObject != null && StartLevelRoutine == null && PlayerState.IsStable && (Time.time >= PlayerState.TimeGrounded + GameSettings.TimeBetweenLevels || (Input.GetKeyDown(GameSettings.SkipKey) && OutcomeUI.activeSelf)))
         {
             StartNextLevel();
         }
-        else if (PlayerObject == null && CurrentLevel != LevelType.MainMenu && StartLevelRoutine == null)
+        else if ((PlayerObject == null || (!PlayerObjectActive && Input.GetKeyDown(GameSettings.SkipKey) && OutcomeUI.activeSelf)) && CurrentLevel != LevelType.MainMenu && StartLevelRoutine == null)
         {
             ClearLevel();
             StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
@@ -278,6 +279,9 @@ public class LevelManager : MonoBehaviour
             Score += CalculateScore();
         if (OutcomeScore == null) OutcomeScore = OutcomeUI.transform.GetChild(0).GetChild(11).GetComponent<TextMeshProUGUI>();
         OutcomeScore.text = Score.ToString();
+
+        if (OutcomeSkipText == null) OutcomeSkipText = OutcomeUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        OutcomeSkipText.text = $"Press {GameSettings.SkipKey.ToString()} to skip";
     }
     private int CalculateScore()
     {

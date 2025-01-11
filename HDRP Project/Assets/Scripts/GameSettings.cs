@@ -1,7 +1,10 @@
+using UnityEngine;
+
 public class GameSettings
 {
-    public const float TimeBetweenLevels = 20f;
+    public const float TimeBetweenLevels = 15f;
     public const string HighScoreKey = "LandTheBooster_HS";
+    public static KeyCode SkipKey = KeyCode.Space;
 
     public const int maxDistancePoints = 15;
     public const float idealDistance = 0f; // Distance for max score
