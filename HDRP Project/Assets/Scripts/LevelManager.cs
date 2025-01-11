@@ -82,6 +82,16 @@ public class LevelManager : MonoBehaviour
             StartLevelRoutine = StartCoroutine(StartLevel(LevelType.MainMenu));
     }
 
+    [ContextMenu("Reset Level")]
+    public void ResetLevel()
+    {
+        ClearLevel();
+        StartLevelRoutine = StartCoroutine(StartLevel(CurrentLevel));
+    }
+
+    [ContextMenu("Reset Score")]
+    public void ResetScore() { SetHighScore(0); }
+
     private IEnumerator StartLevel(LevelType level)
     {
         yield return new WaitForEndOfFrame();
